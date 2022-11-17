@@ -29,15 +29,9 @@ let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
 endif
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
-Plug 'ludwig/split-manpage.vim'
-Plug 'hail2u/vim-css3-syntax'
 Plug 'gko/vim-coloresque'
-Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
-Plug 'davidhalter/jedi-vim'
 call plug#end()
 
 " CUSTOM CONFIG
@@ -76,7 +70,7 @@ let g:floaterm_keymap_toggle = '<Leader>t'
 nmap <c-t> :FloatermNew fff<cr>
 
 " FZF
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore node_modules -U -g ""'
 nnoremap <Leader>e :Files<Cr>
 
 " vim-airline
@@ -256,19 +250,5 @@ nmap <leader>gt :GTestRunUnderCursor<cr>
 " dart-vim-plugin
 let g:dart_style_guide = 2
 
-" ultisnips
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+" emmet-vim
+let g:user_emmet_leader_key='<leader>'
