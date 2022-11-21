@@ -51,10 +51,12 @@ cnoreabbrev Qall qall
 
 " Vanilla Neovim
 set encoding=utf-8
+set mouse=a
 syntax on
 set number
 let mapleader = ","
 let g:python_host_prog = '/usr/bin/python3'
+set background=dark
 colorscheme darkplus
 inoremap \\ <ESC> :!
 nnoremap \\ :!
