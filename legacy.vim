@@ -1,6 +1,5 @@
 " PLUGINS
 call plug#begin(expand('~/.config/nvim/plugged'))
-Plug 'sheerun/vim-polyglot'
 Plug 'voldikss/vim-floaterm'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -15,9 +14,17 @@ Plug '907th/vim-auto-save'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'cdelledonne/vim-cmake'
 Plug 'alepez/vim-gtest'
-Plug 'martinsione/darkplus.nvim'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'Shirk/vim-gas'
+Plug 'morhetz/gruvbox'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/playground'
+Plug 'rust-lang/rust.vim'
+Plug 'APZelos/blamer.nvim'
+Plug 'matze/vim-move'
+Plug 'tpope/vim-surround'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -47,6 +54,7 @@ cnoreabbrev wQ wq
 cnoreabbrev WQ wq
 cnoreabbrev W w
 cnoreabbrev Q q
+cnoreabbrev X x
 cnoreabbrev Qall qall
 
 " Vanilla Neovim
@@ -57,14 +65,20 @@ set number
 let mapleader = ","
 let g:python_host_prog = '/usr/bin/python3'
 set background=dark
-colorscheme darkplus
+colorscheme gruvbox
 inoremap \\ <ESC> :!
 nnoremap \\ :!
 inoremap jj <ESC>
 nmap <leader><tab> <c-w>w
 nmap <c-s> :w<CR>
 imap <c-s> <Esc>:w<CR>a
+nmap <leader>x :Explore<CR>
 set grepprg=ag\ --nogroup\ --nocolor
+:set tabstop=4
+:set shiftwidth=4
+:set expandtab
+set rnu
+se cursorline
 
 " floaterm
 let g:floaterm_keymap_new = '<Leader>ft'
@@ -114,7 +128,6 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
@@ -215,6 +228,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
@@ -251,6 +265,27 @@ nmap <leader>gt :GTestRunUnderCursor<cr>
 
 " dart-vim-plugin
 let g:dart_style_guide = 2
+nmap <leader>df :DartFmt<cr>
 
 " emmet-vim
 let g:user_emmet_leader_key='<leader>'
+
+" vimspector
+" mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+
+" vim-flutter
+" " Some of these key choices were arbitrary;
+" it's just an example.
+nnoremap <leader>fa :FlutterRun -d chrome<cr>
+nnoremap <leader>fq :FlutterQuit<cr>
+nnoremap <leader>fr :FlutterHotReload<cr>
+nnoremap <leader>fR :FlutterHotRestart<cr>
+nnoremap <leader>fD :FlutterVisualDebug<cr>
+
+" CocFlutter
+
